@@ -1,9 +1,74 @@
 //Thanh toán trực tuyến
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 import { QrcodeOutlined } from "@ant-design/icons";
 
-const OnlinePayments: React.FC = () => {
+function OnlinePayments() {
+  //data
+  const dataHK = [
+    {
+      id: 1,
+      name: "HK1 (2020-2021)",
+      value: 1,
+    },
+    {
+      id: 2,
+      name: "HK2 (2020-2021)",
+      value: 2,
+    },
+    {
+      id: 3,
+      name: "HK3 (2020-2021)",
+      value: 3,
+    },
+  ];
+
+  const dataMonHoc = [
+    {
+      ma: "TN",
+      name: "	Hoc phi tot nghiep",
+      tc: 0,
+      batBuoc: true,
+      soTien: 1000000,
+    },
+    {
+      ma: "420300242105",
+      name: "Tieng Anh 2",
+      tc: 3,
+      batBuoc: true,
+      soTien: 1980000,
+    },
+    {
+      ma: "420300362101",
+      name: "Lap trinh WWW (Java)",
+      tc: 4,
+      batBuoc: true,
+      soTien: 3010000,
+    },
+  ];
+  //select
+  const [isSelect, setIsSelect] = useState<number[]>([]);
+
+  //function
+  function controllCollapse(index: number) {
+    setIsSelect((prevState) => {
+      if (prevState.includes(index)) {
+        return prevState.filter((item) => item !== index);
+      } else {
+        return [...prevState, index];
+      }
+    });
+    console.log(isSelect);
+  }
+
+  function controllCollapseAll() {
+    if (isSelect.length === dataMonHoc.length) {
+      setIsSelect([]);
+    } else {
+      setIsSelect(dataMonHoc.map((_, index) => index));
+    }
+  }
+
   return (
     <div className="box-df snipcss-13YW3">
       <div className="portlet">
@@ -24,21 +89,11 @@ const OnlinePayments: React.FC = () => {
                 aria-placeholder="Tất cả"
               >
                 <option value="">Tất cả</option>
-                <option value={37}>HK1 (2020-2021)</option>
-                <option value={38}>HK2 (2020-2021)</option>
-                <option value={39}>HK3 (2020-2021)</option>
-                <option value={40}>HK1 (2021-2022)</option>
-                <option value={41}>HK2 (2021-2022)</option>
-                <option value={42}>HK3 (2021-2022)</option>
-                <option value={43}>HK1 (2022-2023)</option>
-                <option value={44}>HK2 (2022-2023)</option>
-                <option value={45}>HK3 (2022-2023)</option>
-                <option value={46}>HK1 (2023-2024)</option>
-                <option value={56}>HK2 (2023-2024)</option>
-                <option value={57}>HK3 (2023-2024)</option>
-                <option value={58}>HK1 (2024-2025)</option>
-                <option value={59}>HK2 (2024-2025)</option>
-                <option value={60}>HK3 (2024-2025)</option>
+                {dataHK.map((item) => (
+                  <option key={item.id} value={item.value}>
+                    {item.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -74,7 +129,7 @@ const OnlinePayments: React.FC = () => {
                     <input
                       type="checkbox"
                       id="chkAll"
-                      // onclick="checkAll(this); sumKhoanNop();"
+                      onClick={() => controllCollapseAll()}
                       defaultChecked
                     />
                   </td>
@@ -87,195 +142,32 @@ const OnlinePayments: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="text-center">
-                    <input
-                      defaultChecked
-                      className="chkKTT"
-                      data-allowcheck="True"
-                      data-bankid=""
-                      data-batbuoc="True"
-                      data-dongiabgvat="False"
-                      data-dot={56}
-                      data-id={363}
-                      data-idcongno=""
-                      data-idcongnonoitru=""
-                      data-iddangkyhocphan=""
-                      data-iddangkythilai=""
-                      data-iddangkythitotnghiep=""
-                      data-iddukienthu=""
-                      data-idkehoachthuchung="Rnqd5higJzjMlfwOjo-giQ"
-                      data-idloaithu="9jZsNbbF7Eduwkz6f6TnOw"
-                      data-idsub="qOD4AsGAVmCsDBDBQqqxVw"
-                      data-idthu="Rnqd5higJzjMlfwOjo-giQ"
-                      data-ma="TN"
-                      data-mucnop={1000000}
-                      data-noidungthu="Hoc phi tot nghiep"
-                      data-sotien={1000000}
-                      data-trandate=""
-                      data-transid=""
-                      id="ckbThanhToan3630"
-                      name="ckbThanhToan3630"
-                      // onclick="sumKhoanNop()"
-                      type="checkbox"
-                      defaultValue="true"
-                    />
-                    <input
-                      name="ckbThanhToan3630"
-                      type="hidden"
-                      defaultValue="false"
-                    />
-                  </td>
-                  <td
-                  // onclick="chonKhoanThu('ckbThanhToan' + 3630)"
-                  >
-                    1
-                  </td>
-                  <td
-                  // onclick="chonKhoanThu('ckbThanhToan' + 3630)"
-                  >
-                    TN
-                  </td>
-                  <td
-                    className="text-left"
-                    //   onclick="chonKhoanThu('ckbThanhToan' + 3630)"
-                  >
-                    Hoc phi tot nghiep
-                  </td>
-                  <td />
-                  <td>
-                    <div>
-                      <div className="check" />
-                    </div>
-                  </td>
-                  <td className="text-right">1.000.000</td>
-                </tr>
-                <tr>
-                  <td className="text-center">
-                    <input
-                      // defaultChecked="checked"
-                      className="chkKTT"
-                      data-allowcheck="True"
-                      data-bankid=""
-                      data-batbuoc="True"
-                      data-dongiabgvat="False"
-                      data-dot={57}
-                      data-id={8780995}
-                      data-idcongno=""
-                      data-idcongnonoitru=""
-                      data-iddangkyhocphan="N7Iw9eO3AmRjKdhOArYivw"
-                      data-iddangkythilai=""
-                      data-iddangkythitotnghiep=""
-                      data-iddukienthu=""
-                      data-idkehoachthuchung=""
-                      data-idloaithu="ngAdyNBuG_uKVf4Z4ITRZw"
-                      data-idsub="fpKUm9gsUWe3IWdyRYefNQ"
-                      data-idthu="N7Iw9eO3AmRjKdhOArYivw"
-                      data-ma={420300242105}
-                      data-mucnop={1980000}
-                      data-noidungthu="Tieng Anh 2"
-                      data-sotien={1980000}
-                      data-trandate=""
-                      data-transid=""
-                      id="ckbThanhToan87809951"
-                      name="ckbThanhToan87809951"
-                      // onclick="sumKhoanNop()"
-                      type="checkbox"
-                      defaultValue="true"
-                    />
-                    <input
-                      name="ckbThanhToan87809951"
-                      type="hidden"
-                      defaultValue="false"
-                    />
-                  </td>
-                  <td
-                  // onclick="chonKhoanThu('ckbThanhToan' + 87809951)"
-                  >
-                    2
-                  </td>
-                  <td
-                  // onclick="chonKhoanThu('ckbThanhToan' + 87809951)"
-                  >
-                    420300242105
-                  </td>
-                  <td
-                    className="text-left"
-                    //   onclick="chonKhoanThu('ckbThanhToan' + 87809951)"
-                  >
-                    Tieng Anh 2
-                  </td>
-                  <td>3</td>
-                  <td>
-                    <div>
-                      <div className="check" />
-                    </div>
-                  </td>
-                  <td className="text-right">1.980.000</td>
-                </tr>
-                <tr>
-                  <td className="text-center">
-                    <input
-                      defaultChecked
-                      className="chkKTT"
-                      data-allowcheck="True"
-                      data-bankid=""
-                      data-batbuoc="True"
-                      data-dongiabgvat="False"
-                      data-dot={57}
-                      data-id={8785386}
-                      data-idcongno=""
-                      data-idcongnonoitru=""
-                      data-iddangkyhocphan="U50i7LSciPDZ7fsmC-BLEQ"
-                      data-iddangkythilai=""
-                      data-iddangkythitotnghiep=""
-                      data-iddukienthu=""
-                      data-idkehoachthuchung=""
-                      data-idloaithu="ngAdyNBuG_uKVf4Z4ITRZw"
-                      data-idsub="fpKUm9gsUWe3IWdyRYefNQ"
-                      data-idthu="U50i7LSciPDZ7fsmC-BLEQ"
-                      data-ma={420300362101}
-                      data-mucnop={3010000}
-                      data-noidungthu="Lap trinh WWW (Java)"
-                      data-sotien={3010000}
-                      data-trandate=""
-                      data-transid=""
-                      id="ckbThanhToan87853861"
-                      name="ckbThanhToan87853861"
-                      // onclick="sumKhoanNop()"
-                      type="checkbox"
-                      defaultValue="true"
-                    />
-                    <input
-                      name="ckbThanhToan87853861"
-                      type="hidden"
-                      defaultValue="false"
-                    />
-                  </td>
-                  <td
-                  //  onclick="chonKhoanThu('ckbThanhToan' + 87853861)"
-                  >
-                    3
-                  </td>
-                  <td
-                  // onclick="chonKhoanThu('ckbThanhToan' + 87853861)"
-                  >
-                    420300362101
-                  </td>
-                  <td
-                    className="text-left"
-                    //   onclick="chonKhoanThu('ckbThanhToan' + 87853861)"
-                  >
-                    Lap trinh WWW (Java)
-                  </td>
-                  <td>4</td>
-                  <td>
-                    <div>
-                      <div className="check" />
-                    </div>
-                  </td>
-                  <td className="text-right">3.010.000</td>
-                </tr>
+                {dataMonHoc.map((item, index) => (
+                  <tr key={index} onClick={() => controllCollapse(index)}>
+                    <td className="text-center">
+                      <input
+                        aria-selected={
+                          isSelect.includes(index) ? true : false
+                        }
+                        defaultChecked={isSelect.includes(index)}
+                        className="chkKTT"
+                        type="checkbox"
+                        defaultValue="true"
+                      />
+                    </td>
+                    <td>{index + 1}</td>
+                    <td>{item.ma}</td>
+                    <td className="text-left">{item.name}</td>
+                    <td>{item.tc}</td>
+                    <td>
+                      <div>
+                        <div className="check" />
+                      </div>
+                    </td>
+                    <td className="text-right">{item.soTien}</td>
+                  </tr>
+                ))}
+                {/*Tổng thanh toán  */}
                 <tr>
                   <td colSpan={6} className="text-right">
                     <p className="bold">
@@ -287,16 +179,13 @@ const OnlinePayments: React.FC = () => {
                   </td>
                   <td className="text-right">
                     <p className="bold">
-                      <span
-                        id="balanceSum"
-                        data-tongtien={5990000}
-                        className="total"
-                      >
+                      <span id="balanceSum" className="total">
                         5.990.000
                       </span>
                     </p>
                   </td>
                 </tr>
+                {/* Ghi chú thanh toán */}
                 <tr>
                   <td colSpan={7} id="style-Z5Qzb" className="style-Z5Qzb">
                     <p>
@@ -380,119 +269,127 @@ const OnlinePayments: React.FC = () => {
                         Chọn ngân hàng thanh toán
                       </span>
                     </div>
-                    <div className="col-md-8 style-U2rmD" id="style-U2rmD">
-                      <button
-                        type="button"
-                        //   onclick="checkShowPopupChonThongTinXuatHDDT(null, true)"
-                        className="btn btn-success btn-qr-custom btn-bank-custom"
-                      >
-                        <span id="thanhtoanonline-checkout-qr-button">
-                        <QrcodeOutlined />   Thanh toán QR-Code
-                        </span>
-                      </button>
-                      <button
-                        //   onclick="checkShowPopupChonThongTinXuatHDDT()"
-                        className="btn btn--m block first btn-bank-custom btn-thanhtoan-disabled btn-atm-custom"
-                        lang="thanhtoanonline-checkout-button"
-                      >
-                        THANH TOÁN
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr style={{ background: "#f9f9f9" }}>
-                  <td colSpan={7}>
-                    <div
-                      className="main-list-bank style-ooPz7"
-                      id="style-ooPz7"
-                    >
-                      <div className="content-list-bank">
-                        <input
-                          type="radio"
-                          name="radBank"
-                          className="radio-bank-cb"
-                          data-isqrcode="False"
-                          data-isatm="True"
-                          data-manganhang="VIETCOMBANK"
-                          defaultValue={2}
-                          data-tgtt={1}
-                          data-phidv={0}
-                          data-phidvphantram="0,000"
-                          data-messphidv=""
-                        />
-                        <div className="radio-bank-img">
-                          <img
-                            className="img-list-bank"
-                            src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietcombank.png"
-                            alt="VietcomBank"
-                          />
+                    <tr style={{ background: "#f9f9f9" }}>
+                      <td colSpan={7}>
+                        <div
+                          className="main-list-bank style-ooPz7"
+                          id="style-ooPz7"
+                        >
+                          <div className="content-list-bank">
+                            <input
+                              type="radio"
+                              name="radBank"
+                              className="radio-bank-cb"
+                              data-isqrcode="False"
+                              data-isatm="True"
+                              data-manganhang="VIETCOMBANK"
+                              defaultValue={2}
+                              data-tgtt={1}
+                              data-phidv={0}
+                              data-phidvphantram="0,000"
+                              data-messphidv=""
+                            />
+                            <div className="radio-bank-img">
+                              <img
+                                className="img-list-bank"
+                                src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietcombank.png"
+                                alt="VietcomBank"
+                              />
+                            </div>
+                          </div>
+                          <div className="content-list-bank">
+                            <input
+                              type="radio"
+                              name="radBank"
+                              className="radio-bank-cb"
+                              data-isqrcode="False"
+                              data-isatm="True"
+                              data-manganhang="VNPAY"
+                              defaultValue={999}
+                              data-tgtt={1}
+                              data-phidv={0}
+                              data-phidvphantram="0,000"
+                              data-messphidv=""
+                            />
+                            <div className="radio-bank-img">
+                              <img
+                                className="img-list-bank"
+                                src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietinbank.png"
+                                alt="VNPAY"
+                              />
+                            </div>
+                          </div>
+                          <div className="content-list-bank">
+                            <input
+                              type="radio"
+                              name="radBank"
+                              className="radio-bank-cb"
+                              data-isqrcode="True"
+                              data-isatm="False"
+                              data-manganhang="VIETINBANK"
+                              defaultValue={1}
+                              data-tgtt={2}
+                              data-phidv={0}
+                              data-phidvphantram="0,000"
+                              data-messphidv=""
+                            />
+                            <div className="radio-bank-img">
+                              <img
+                                className="img-list-bank"
+                                src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietinbank_qr.png"
+                                alt="VIETINBANK"
+                              />
+                            </div>
+                          </div>
+                          <div className="content-list-bank">
+                            <input
+                              type="radio"
+                              name="radBank"
+                              className="radio-bank-cb"
+                              data-isqrcode="False"
+                              data-isatm="True"
+                              data-manganhang="NAMABANK"
+                              defaultValue={7}
+                              data-tgtt={2}
+                              data-phidv={0}
+                              data-phidvphantram="0,000"
+                              data-messphidv=""
+                            />
+                            <div className="radio-bank-img">
+                              <img
+                                className="img-list-bank"
+                                src="https://mobile2.ascvn.com.vn/Logo/Banks2/namabank.png"
+                                alt="NAMABANK"
+                              />
+                            </div>
+                          </div>
                         </div>
+                      </td>
+                    </tr>
+                    <div className="col-md-8 style-U2rmD " id="style-U2rmD">
+                      <div className="btn">
+                        <button
+                          type="button"
+                          className="btn btn-success btn-qr-custom btn-bank-custom bold  hover"
+                        >
+                          <QrcodeOutlined /> Thanh toán QR-Code
+                        </button>
                       </div>
-                      <div className="content-list-bank">
-                        <input
-                          type="radio"
-                          name="radBank"
-                          className="radio-bank-cb"
-                          data-isqrcode="False"
-                          data-isatm="True"
-                          data-manganhang="VNPAY"
-                          defaultValue={999}
-                          data-tgtt={1}
-                          data-phidv={0}
-                          data-phidvphantram="0,000"
-                          data-messphidv=""
-                        />
-                        <div className="radio-bank-img">
-                          <img
-                            className="img-list-bank"
-                            src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietinbank.png"
-                            alt="VNPAY"
-                          />
-                        </div>
-                      </div>
-                      <div className="content-list-bank">
-                        <input
-                          type="radio"
-                          name="radBank"
-                          className="radio-bank-cb"
-                          data-isqrcode="True"
-                          data-isatm="False"
-                          data-manganhang="VIETINBANK"
-                          defaultValue={1}
-                          data-tgtt={2}
-                          data-phidv={0}
-                          data-phidvphantram="0,000"
-                          data-messphidv=""
-                        />
-                        <div className="radio-bank-img">
-                          <img
-                            className="img-list-bank"
-                            src="https://mobile2.ascvn.com.vn/Logo/Banks2/vietinbank_qr.png"
-                            alt="VIETINBANK"
-                          />
-                        </div>
-                      </div>
-                      <div className="content-list-bank">
-                        <input
-                          type="radio"
-                          name="radBank"
-                          className="radio-bank-cb"
-                          data-isqrcode="False"
-                          data-isatm="True"
-                          data-manganhang="NAMABANK"
-                          defaultValue={7}
-                          data-tgtt={2}
-                          data-phidv={0}
-                          data-phidvphantram="0,000"
-                          data-messphidv=""
-                        />
-                        <div className="radio-bank-img">
-                          <img
-                            className="img-list-bank"
-                            src="https://mobile2.ascvn.com.vn/Logo/Banks2/namabank.png"
-                            alt="NAMABANK"
-                          />
-                        </div>
+                      <div className="btn">
+                        <button className="btn-53 bold block first ">
+                          <div className="original">Thanh toán</div>
+                          <div className="letters">
+                            <span>T</span>
+                            <span>h</span>
+                            <span>a</span>
+                            <span>nh</span>
+                            <span>&nbsp;</span>
+                            <span>T</span>
+                            <span>o</span>
+                            <span>á</span>
+                            <span>n</span>
+                          </div>
+                        </button>
                       </div>
                     </div>
                   </td>
@@ -505,5 +402,6 @@ const OnlinePayments: React.FC = () => {
       </div>
     </div>
   );
-};
+}
+
 export default OnlinePayments;

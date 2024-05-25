@@ -249,7 +249,7 @@ function frameProgram() {
                   <th>STT</th>
                   <th style={{ width: "450px" }}> Tên môn học/Học phần </th>
                   <th>Mã Học phần</th>
-                  <th>
+                  <th style={{ width: "250px" }}>
                     <Tooltip title="Học phần: học trước (a), tiên quyết (b), song hành (c)">
                       <p style={{ color: "#1da1f3" }}>Học phần</p>
                     </Tooltip>
@@ -276,15 +276,30 @@ function frameProgram() {
                     <tr
                       role="row"
                       className="row-head "
-                      data-toggle="collapse"
                       data-target=".tr-row-1"
+                      style={{ backgroundColor: "#FE0000" }}
                       onClick={() => controllCollapse(index)}
                     >
-                      <td colSpan={4} className="text-center">
+                      <td
+                        colSpan={4}
+                        className="text-center"
+                        style={{
+                          fontSize: "16 px",
+                          fontWeight: "bold",
+                          color: "white",
+                        }}
+                      >
                         Học kỳ {index + 1}
                       </td>
-                      <td className="text-center">
-                        <span className="">{item.soTC}</span>
+                      <td
+                        className="text-center"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          color: "white",
+                        }}
+                      >
+                        {item.soTC}
                       </td>
                       <td colSpan={5} />
                     </tr>
@@ -322,13 +337,23 @@ function frameProgram() {
                           <tr
                             key={index}
                             role="row"
-                            className={`tr-row-1 ${
+                            className={`tr-row-1  ${
                               isDisplay.includes(index) ? " " : "collapse "
                             }`}
                             style={
                               monHoc.pass
-                                ? { background: "#DDE3E9" }
-                                : { background: "#FDF7C8" }
+                                ? {
+                                    background: "#DDE3E9",
+                                    border: "solid",
+                                    borderColor: "white",
+                                    borderWidth: "3px",
+                                  }
+                                : {
+                                    background: "#FDF7C8",
+                                    border: "solid",
+                                    borderColor: "white",
+                                    borderWidth: "3px",
+                                  }
                             }
                           >
                             <td>
@@ -441,8 +466,8 @@ function frameProgram() {
                           </tr>
                         );
                       })}
-                    {/* Tự chọn */}
 
+                    {/* Tự chọn */}
                     {item.soTCTC == 0 ? (
                       " "
                     ) : (
@@ -484,8 +509,18 @@ function frameProgram() {
                               }`}
                               style={
                                 monHoc.pass
-                                  ? { background: "#DDE3E9" }
-                                  : { background: "#FDF7C8" }
+                                  ? {
+                                      background: "#DDE3E9",
+                                      border: "solid",
+                                      borderColor: "white",
+                                      borderWidth: "3px",
+                                    }
+                                  : {
+                                      background: "#FDF7C8",
+                                      border: "solid",
+                                      borderColor: "white",
+                                      borderWidth: "3px",
+                                    }
                               }
                             >
                               <td>

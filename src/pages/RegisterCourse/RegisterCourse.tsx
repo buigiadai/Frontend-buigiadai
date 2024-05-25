@@ -609,7 +609,7 @@ function RegisterCourse() {
                             <p className="color-white">
                               <span
                                 itemID="dkhp-trangthai"
-                                className="color-white"
+                                className="color-black"
                               >
                                 Thông tin lớp học phần
                               </span>
@@ -617,20 +617,13 @@ function RegisterCourse() {
                           </th>
                           <th>
                             <div>
-                              <span className="color-white">Nhóm</span>
+                              <span className="color-black">Nhóm</span>
                             </div>
                           </th>
 
                           <th>
                             <div>
-                              <span className="color-white">
-                                <span
-                                  itemID="dkhp-sisomax"
-                                  className="color-white"
-                                >
-                                  Sĩ số
-                                </span>
-                              </span>
+                              <span className="color-black">Sĩ số</span>
                             </div>
                           </th>
                         </tr>

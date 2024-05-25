@@ -1192,6 +1192,9 @@ p {
 .color-white {
   color: white;
 }
+.color-black {
+  color: black;
+}
 .selected {
   background-color: #fff9c0; /* Màu nền mới khi được chọn */
 }

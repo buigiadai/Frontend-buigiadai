@@ -17,7 +17,7 @@ const Root = () => {
  
   return (
     <Layout className="min-h-screen">
-      <Sidebar />
+      <Sidebar/>
       <Layout>
         <MainHeader />
         <div className="pb-5 px-5 bg-sub h-full">
